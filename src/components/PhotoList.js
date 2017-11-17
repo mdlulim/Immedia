@@ -2,9 +2,9 @@ import React from 'react';
 import NotFound from './NotFound';
 import PhotoItem from './PhotoItem';
 
-const PhotoList = (props) => (
+const PhotoList = ({pageTitle}) => (
   <div className="photo-container">
-    <h2>Results</h2>
+    <h2>{pageTitle}</h2>
     <ul>
       <PhotoItem />
       <PhotoItem />

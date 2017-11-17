@@ -5,10 +5,9 @@ import NavItem from './NavItem';
 const Navigation = (props) => (
   <nav className="main-nav">
     <ul>
-      <NavItem />
-      <li><a href='#'>Cats</a></li>
-      <li><a href='#'>Dogs</a></li>
-      <li><a href='#'>Computers</a></li>
+      <NavItem url="/cats" name="cats"/>
+      <NavItem url="/dogs" name="dogs"/>
+      <NavItem url="/computers" name="computers" />
     </ul>
   </nav>
 );
