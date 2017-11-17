@@ -3,7 +3,7 @@ import NotFound from './NotFound';
 import PhotoItem from './PhotoItem';
 
 const PhotoList = (props) => (
-  <div class="photo-container">
+  <div className="photo-container">
     <h2>Results</h2>
     <ul>
       <PhotoItem />

@@ -3,7 +3,7 @@ import NavItem from './NavItem';
 
 
 const Navigation = (props) => (
-  <nav class="main-nav">
+  <nav className="main-nav">
     <ul>
       <NavItem />
       <li><a href='#'>Cats</a></li>
