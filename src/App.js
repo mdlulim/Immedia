@@ -25,11 +25,21 @@ class App extends Component {
       });
   }
 
+  performSearch(term) {
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=748c099de145d35660505013da5a508a&text=${term}&format=json&nojsoncallback=1`)
+      .then(result => {
+        this.setState({photos: result.data.photos.photo});
+      })
+      .catch(error => {
+        console.log("Error occured while fetching data from Flickr: " + error.message);
+      });
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div className="container">
-            <SearchForm />
+            <SearchForm onSearch={term => this.performSearch(term)} />
             <Navigation />
             <PhotoList photos={this.state.photos} />
         </div>
