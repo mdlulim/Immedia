@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PhotoItem = (props) => (
+const PhotoItem = ({url}) => (
   <li>
-    <img src="https://farm5.staticflickr.com/4342/36338751244_316b6ee54b.jpg" alt="" />
+    <img src={url} alt="" />
   </li>
 );
 
