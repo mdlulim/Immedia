@@ -26,11 +26,12 @@ class App extends Component {
       });
   }
 
-  performSearch(term) {
+  performSearch(term, callback) {
     axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=748c099de145d35660505013da5a508a&text=${term}&format=json&nojsoncallback=1`)
       .then(result => {
         console.log(result);
         this.setState({photos: result.data.photos.photo});
+        callback();
       })
       .catch(error => {
         console.log("Error occured while fetching data from Flickr: " + error.message);
@@ -48,6 +49,7 @@ class App extends Component {
               <Route path="/cats" render={() => <Page pageTitle="Cats" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
               <Route path="/dogs" render={() => <Page pageTitle="Dogs" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
               <Route path="/computers" render={() => <Page pageTitle="Computers" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
+              <Route path="/search" render={() => <Page photos={this.state.photos}/>} />
               <Route component={NotFound} />
             </Switch>
         </div>
