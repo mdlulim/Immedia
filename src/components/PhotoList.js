@@ -11,8 +11,9 @@ const PhotoList = ({photos}) => {
 
   return(
     <ul>
-      {photoItems}
-      <NotFound />
+      {
+        (photos.length > 0) ? photoItems : <NotFound/>
+      }
     </ul>
   );
 };
