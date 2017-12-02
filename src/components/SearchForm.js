@@ -13,11 +13,10 @@ class SearchForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.props.history);
-    // let path = `/search?q=${this.query.value}`;
-    // this.props.onSearch(this.query.value);
-    // e.currentTarget.reset();
-    // return <Redirect to={path} push />;
+    let path = `/search?q=${this.query.value}`;
+    this.props.onSearch(this.query.value);
+    e.currentTarget.reset();
+    this.props.history.push(path);
   }
 
   render(){

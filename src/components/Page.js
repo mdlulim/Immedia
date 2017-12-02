@@ -1,21 +1,30 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 
 import PhotoList from './PhotoList';
+import Navigation from './Navigation';
+import SearchForm from './SearchForm';
 
-const Page = ({pageTitle, fetchPhotos, photos}) => {
+const Page = ({title, fetchLatestPhotos, fetchPhotos, photos, history}) => {
 
-  //fire off performSearch if page is not main
-  if(pageTitle) {
-    fetchPhotos(pageTitle);
+  if(title !== "Search"){
+    if(title === "Home") {
+      fetchLatestPhotos();
+    } else {
+      fetchPhotos(title);
+    }
   }
 
   return(
-    <div className="photo-container">
-      <h2>{pageTitle}</h2>
-      <PhotoList photos={photos} />
+    <div className="container">
+      <SearchForm history={history} onSearch={term => fetchPhotos(term)}/>
+      <Navigation/>
+      <div className="photo-container">
+        { title !== "Search" && <h2>{title}</h2>}
+        <PhotoList photos={photos} />
+      </div>
     </div>
   );
 }
 
-
-export default Page;
+export default withRouter(Page);
