@@ -1,8 +1,12 @@
 # Team Treehouse FETD 11th Project: React Flickr Gallery
 
-This is 11th project for Team Treehouse's Front End Tech Degree. Here, the author is tasked to turn a static HTML template into a dynamic one using React.js. It fetches upto hundred of photos and displays on screen using Flickr API. In order to accomplish the tasks, React Router 4 library and Axios library are used
+This is 11th project for Team Treehouse's Front End Tech Degree. Here, the author is tasked to turn a static HTML template into a dynamic one using React.js.
 
-Keywords: HTML5, CSS3, React.js, React Router 4, Axios, API integration
+As implied by the title, the app is an image gallery with photos from Flickr. On load, it fetches and displays photo on screen using Flickr API. It has navigation menu that loads corresponding photos on click, and it has a search bar where user could search and display images by keywords. If no images are found, it displays an error message on screen. It's a single page application, and it doesn't refresh when it routes to different page.
+
+The app demonstrates the author's ability in the use of React Router 4, React.js and API integration
+
+The rubric of this project can be found here: https://drive.google.com/open?id=1xv1qFnDh2rhzxS3PxWhtoVga_M1cCY2I   
 
 ## Table of Contents
 - Demo

@@ -26,12 +26,11 @@ class App extends Component {
       });
   }
 
-  performSearch(term, callback) {
+  performSearch(term) {
     axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=748c099de145d35660505013da5a508a&text=${term}&format=json&nojsoncallback=1`)
       .then(result => {
-        console.log(result);
+        // console.log(result);
         this.setState({photos: result.data.photos.photo});
-        callback();
       })
       .catch(error => {
         console.log("Error occured while fetching data from Flickr: " + error.message);
@@ -42,14 +41,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-            <SearchForm onSearch={term => this.performSearch(term)} />
-            <Navigation/>
             <Switch>
-              <Route exact path="/" render={() => <Page photos={this.state.photos} />} />
-              <Route path="/cats" render={() => <Page pageTitle="Cats" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
-              <Route path="/dogs" render={() => <Page pageTitle="Dogs" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
-              <Route path="/computers" render={() => <Page pageTitle="Computers" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
-              <Route path="/search" render={() => <Page photos={this.state.photos}/>} />
+              <Route path=`${match.path}` render = { () => <Page photos={this.state.photos} />} />
+              <Route path="/react-flickr-gallery/cats" render={() => <Page pageTitle="Cats" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
+              <Route path="/react-flickr-gallery/dogs" render={() => <Page pageTitle="Dogs" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
+              <Route path="/react-flickr-gallery/computers" render={() => <Page pageTitle="Computers" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
+              <Route path="/react-flickr-gallery/search" render={() => <Page photos={this.state.photos}/>} />
               <Route component={NotFound} />
             </Switch>
         </div>

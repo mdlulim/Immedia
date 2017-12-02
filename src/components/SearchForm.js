@@ -1,14 +1,23 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 class SearchForm extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    if(!this.props.history) {
+      console.log("history doesn't exist");
+    }
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    let path = `search?q=${this.query.value}`;
-    this.props.onSearch(this.query.value, function(){
-      this.props.history.push(path);
-    });
-    e.currentTarget.reset();
+    console.log(this.props.history);
+    // let path = `/search?q=${this.query.value}`;
+    // this.props.onSearch(this.query.value);
+    // e.currentTarget.reset();
+    // return <Redirect to={path} push />;
   }
 
   render(){
