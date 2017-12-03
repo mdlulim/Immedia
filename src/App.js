@@ -45,15 +45,15 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-          <Switch>
-            <Route exact path='/' render={ () => <Page title="Home" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} fetchLatestPhotos={() => this.getRecentPhotos()}/>} />
-            <Route path='/cats' render={() => <Page title="Cats" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
-            <Route path='/dogs' render={() => <Page title="Dogs" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
-            <Route path='/computers' render={() => <Page title="Computers" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
-            <Route path='/search' render={() => <Page title="Search" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)}/>} />
-            <Route component={NotFound} />
-          </Switch>
+      <BrowserRouter basename="/react-flickr-gallery">
+        <Switch>
+          <Route exact path='/' render={ () => <Page title="Home" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} fetchLatestPhotos={() => this.getRecentPhotos()}/>} />
+          <Route path='/cats' render={() => <Page title="Cats" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
+          <Route path='/dogs' render={() => <Page title="Dogs" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
+          <Route path='/computers' render={() => <Page title="Computers" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
+          <Route path='/search' render={() => <Page title="Search" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)}/>} />
+          <Route component={NotFound} />
+        </Switch>
       </BrowserRouter>
     );
   }
