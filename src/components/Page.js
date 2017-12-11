@@ -1,18 +1,15 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import PhotoList from './PhotoList';
 import Navigation from './Navigation';
 import SearchForm from './SearchForm';
 
-const Page = ({title, fetchLatestPhotos, fetchPhotos, photos, history}) => {
+const Page = ({title, currentPage, getPhotos, changePageName, history, photos, fetchPhotos}) => {
 
-  if(title !== "Search"){
-    if(title === "Home") {
-      fetchLatestPhotos();
-    } else {
-      fetchPhotos(title);
-    }
+  if((title !== currentPage) && title !== "Search") {
+    getPhotos(currentPage, title);
+    changePageName(title);
   }
 
   return(

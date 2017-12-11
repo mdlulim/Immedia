@@ -12,12 +12,20 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      photos: []
+      photos: [],
+      currentPage: ""
     }
   }
 
-  componentWillMount() {
-    this.getRecentPhotos();
+  getPhotosForPage(currentPage, title) {
+    // reload when current page is different from the last page visited
+    if((currentPage !== title) && title !== "Search") {
+      if(title === "Home") {
+        this.getRecentPhotos();
+      } else {
+        this.performSearch(title);
+      }
+    }
   }
 
   getRecentPhotos() {
@@ -43,15 +51,19 @@ class App extends Component {
       });
   }
 
+  changePageName(currentPage) {
+      this.setState({currentPage});
+  }
+
   render() {
     return (
       <BrowserRouter basename="/react-flickr-gallery">
         <Switch>
-          <Route exact path='/' render={ () => <Page title="Home" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} fetchLatestPhotos={() => this.getRecentPhotos()}/>} />
-          <Route path='/cats' render={() => <Page title="Cats" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
-          <Route path='/dogs' render={() => <Page title="Dogs" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
-          <Route path='/computers' render={() => <Page title="Computers" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)} />} />
-          <Route path='/search' render={() => <Page title="Search" photos={this.state.photos} fetchPhotos={term => this.performSearch(term)}/>} />
+          <Route exact path='/' render={ () => <Page title="Home" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
+          <Route path='/cats' render={() => <Page title="Cats" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
+          <Route path='/dogs' render={() => <Page title="Dogs" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
+          <Route path='/computers' render={() => <Page title="Computers" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
+          <Route path='/search' render={() => <Page title="Search" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
