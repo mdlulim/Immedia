@@ -2,8 +2,6 @@
 
 This is 11th project for Team Treehouse's Front End Tech Degree. Here, the author is tasked to turn a static HTML template into a dynamic, single page application using React.js.
 
-The app is an image gallery with photos from Flickr. On load, it fetches and displays photo on screen using Flickr API. It has navigation menu that loads corresponding photos on click, and it has a search bar where user could search and display images by keywords. If no images are found, it displays an error message on screen.
-
 The rubric of this project can be found here: https://drive.google.com/open?id=1xv1qFnDh2rhzxS3PxWhtoVga_M1cCY2I   
 
 ## Table of Contents
