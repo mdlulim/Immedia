@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
+import Config from './config';
 
-import SearchForm from './components/SearchForm';
-import Navigation from './components/Navigation';
 import NotFound from './components/NotFound';
 import Page from './components/Page';
 import './App.css';
+
+// styles for this kit
+import "./assets/css/bootstrap.min.css";
+import "./assets/scss/now-ui-kit.scss?v=1.4.0";
+import "./assets/demo/demo.css?v=1.4.0";
+import "./assets/demo/nucleo-icons-page-styles.css?v=1.4.0";
 
 class App extends Component {
   constructor(props) {
@@ -29,10 +34,10 @@ class App extends Component {
   }
 
   getRecentPhotos() {
-    axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=748c099de145d35660505013da5a508a&format=json&nojsoncallback=1')
+    axios.get(Config.api.URL+'?method=flickr.photos.getRecent&api_key=748c099de145d35660505013da5a508a&format=json&nojsoncallback=1')
     .then(result => {
       this.setState({photos: result.data.photos.photo});
-      console.log(this.state.photos);
+      //console.log(this.state.photos);
     })
     .catch(error => {
       console.log("Error occured while fetching data from Flickr: " + error.message);
@@ -40,11 +45,11 @@ class App extends Component {
   }
 
   performSearch(term) {
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=748c099de145d35660505013da5a508a&text=${term}&format=json&nojsoncallback=1`)
+    axios.get(Config.api.URL+`?method=flickr.photos.search&api_key=748c099de145d35660505013da5a508a&text=${term}&format=json&nojsoncallback=1`)
       .then(result => {
         // console.log(result);
         this.setState({photos: result.data.photos.photo});
-        console.log(this.state.photos);
+        //console.log(this.state.photos);
       })
       .catch(error => {
         console.log("Error occured while fetching data from Flickr: " + error.message);
@@ -57,12 +62,9 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter basename="/react-flickr-gallery">
+      <BrowserRouter basename="/">
         <Switch>
           <Route exact path='/' render={ () => <Page title="Home" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
-          <Route path='/cats' render={() => <Page title="Cats" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
-          <Route path='/dogs' render={() => <Page title="Dogs" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
-          <Route path='/computers' render={() => <Page title="Computers" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
           <Route path='/search' render={() => <Page title="Search" {...this.state}  getPhotos={(page,title) => this.getPhotosForPage(page,title)} changePageName={title => this.changePageName(title)} fetchPhotos={term => this.performSearch(term)} />} />
           <Route component={NotFound} />
         </Switch>

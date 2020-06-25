@@ -10,11 +10,14 @@ const PhotoList = ({photos}) => {
   });
 
   return(
-    <ul>
+    <div>
+        <ul>
       {
         (photos.length > 0) ? photoItems : <NotFound/>
       }
     </ul>
+    </div>
+    
   );
 };
 
